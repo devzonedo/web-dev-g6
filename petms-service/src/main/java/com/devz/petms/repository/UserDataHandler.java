@@ -4,8 +4,11 @@
  */
 package com.devz.petms.repository;
 
+import com.devz.petms.dto.UserDTO;
 import com.devz.petms.model.UserRegisterReqModel;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -31,7 +34,7 @@ public class UserDataHandler {
                 values.getUsername(),
                 values.getPword(),
                 values.getTp()};
-            
+
             jdbcTemplate.update(query.toString(), params);
             System.out.println("record inserted success");
             flag = true;
@@ -39,5 +42,32 @@ public class UserDataHandler {
             e.printStackTrace();
         }
         return flag;
+    }
+
+    public List<UserDTO> getLogin(String username, String pword) {
+        StringBuilder query = new StringBuilder();
+        try {
+            query.append("SELECT id,first_name,last_name,role_code,tp FROM tbl_user WHERE username =  ? AND pword = ? ");
+            Object[] params = {username, pword};
+
+            List<UserDTO> userList = jdbcTemplate.query(query.toString(), params, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+            return userList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<UserDTO> getUserList() {
+        StringBuilder query = new StringBuilder();
+        try {
+            query.append("SELECT id,first_name,last_name,role_code,tp FROM tbl_user");
+
+            List<UserDTO> userList = jdbcTemplate.query(query.toString(), new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+            return userList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
