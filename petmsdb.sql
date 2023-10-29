@@ -61,15 +61,18 @@ CREATE TABLE `tbl_user` (
   `role_code` varchar(20) DEFAULT NULL,
   `username` varchar(20) DEFAULT NULL,
   `pword` text DEFAULT NULL,
-  `tp` int(10) DEFAULT NULL,
+  `tp` varchar(10) DEFAULT NULL,
   `created_user` varchar(50) DEFAULT NULL,
   `created_datetime` timestamp NULL DEFAULT current_timestamp(),
   `updated_user` varchar(50) DEFAULT NULL,
   `updated_datetime` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `NewIndex1` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_user` */
+
+insert  into `tbl_user`(`id`,`first_name`,`last_name`,`role_code`,`username`,`pword`,`tp`,`created_user`,`created_datetime`,`updated_user`,`updated_datetime`) values (1,'Rrererett','Ferserererr','USER','ravi','asdddeeee','07888566',NULL,'2023-10-07 22:19:15',NULL,NULL),(3,'Rrerersssssst','Fersereressssssrr','USER','raviii234','asddssdeeee','07888566',NULL,'2023-10-07 22:20:35',NULL,NULL),(4,'Rrerersssssst','Fersereressssssrr','USER','kumara','123','07888566',NULL,'2023-10-14 20:41:56',NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
